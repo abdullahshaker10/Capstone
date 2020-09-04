@@ -3,7 +3,7 @@ from flask import Flask, request, abort, jsonify
 from flask_migrate import Migrate
 
 database_name = "guru99"
-database_path = 'postgres://shaker:a@localhost:5432/guru99'
+database_path = 'postgres://izveqfdssnenxe:02e9028a505d6fd529db5ac3db62d01eceebc6c8fd3a9858ebe98bdcdead9a97@ec2-34-232-212-164.compute-1.amazonaws.com:5432/d687ma0qdnn95q'
 db = SQLAlchemy()
 
 
