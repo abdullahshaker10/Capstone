@@ -15,7 +15,7 @@ def create_app(test_config=None):
     CORS(app)
 
     @app.route('/actors')
-    @requires_auth('get:actors')
+    #@requires_auth('get:actors')
     def reterive_actors():
         try:
             actors = Actor.query.all()
