@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, request, abort, jsonify
 from flask_migrate import Migrate
+from flask_moment import Moment
 
 database_name = "guru99"
 database_path = 'postgres://izveqfdssnenxe:02e9028a505d6fd529db5ac3db62d01eceebc6c8fd3a9858ebe98bdcdead9a97@ec2-34-232-212-164.compute-1.amazonaws.com:5432/d687ma0qdnn95q'
@@ -12,6 +13,7 @@ def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
+    moment = Moment(app)
     migrate = Migrate(app, db)
     with app.app_context():
         db.create_all()
