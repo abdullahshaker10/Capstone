@@ -1,10 +1,14 @@
+import os
+from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, request, abort, jsonify
 from flask_migrate import Migrate
 from flask_moment import Moment
 
 database_name = "guru99"
-database_path = 'postgres://izveqfdssnenxe:02e9028a505d6fd529db5ac3db62d01eceebc6c8fd3a9858ebe98bdcdead9a97@ec2-34-232-212-164.compute-1.amazonaws.com:5432/d687ma0qdnn95q'
+database_path = os.environ.get('DATABASE_URL')
+# 'postgres://shaker:a@localhost:5432/guru99'
+'postgres://izveqfdssnenxe:02e9028a505d6fd529db5ac3db62d01eceebc6c8fd3a9858ebe98bdcdead9a97@ec2-34-232-212-164.compute-1.amazonaws.com:5432/d687ma0qdnn95q'
 db = SQLAlchemy()
 
 
@@ -51,7 +55,8 @@ class Actor(db.Model):
             'id': self.id,
             'name': self.name,
             'age': self.age,
-            'gender': self.gender
+            'gender': self.gender,
+            'movies': self.movies
         }
 
 
@@ -59,7 +64,7 @@ class Movie(db.Model):
     __tablename__ = 'movie'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
-    start_time = db.Column(db.DateTime, default=db.func.now())
+    start_time = db.Column(db.DateTime, default=datetime.utcnow)
 
     actors = db.relationship(
         'Actor',
@@ -85,7 +90,8 @@ class Movie(db.Model):
         return {
             'id': self.id,
             'title': self.title,
-            'start_time': self.start_time
+            'start_time': self.start_time,
+            'actors': self.actors
         }
 
 

@@ -15,7 +15,7 @@ def create_app(test_config=None):
     CORS(app)
 
     @app.route('/actors')
-    #@requires_auth('get:actors')
+    @requires_auth('get:actors')
     def reterive_actors():
         try:
             actors = Actor.query.all()
@@ -115,8 +115,14 @@ def create_app(test_config=None):
         try:
             actor = Actor(name=name, age=age, gender=gender)
             actor.insert()
+            actors = Actor.query.all()
+            formated_actors = {}
+            for actor in actors:
+                formated_actors[actor.id] = actor.format()
             return jsonify({
-                'success': True
+                'success': True,
+                'actors': formated_actors
+
             })
         except:
             return jsonify({
@@ -139,10 +145,14 @@ def create_app(test_config=None):
                     "message": "unprocessable"
                 }), 422
             movie = Movie(title=title, start_time=start_time)
-
             movie.insert()
+            formated_movies = {}
+            movies = Movie.query.all()
+            for movie in movies:
+                formated_movies[movie.id] = movie.format()
             return jsonify({
-                'success': True
+                'success': True,
+                'movies': formated_movies
             })
         except:
             return jsonify({
@@ -173,8 +183,14 @@ def create_app(test_config=None):
             actor.age = age
             actor.gender = gender
             actor.update()
+            actors = Actor.query.all()
+            formated_actors = {}
+            for actor in actors:
+                formated_actors[actor.id] = actor.format()
             return jsonify({
-                'success': True
+                'success': True,
+                'actors': formated_actors
+
             })
         except:
             return jsonify({
@@ -203,8 +219,14 @@ def create_app(test_config=None):
             movie.name = title
             movie.age = start_time
             movie.update()
+            formated_movies = {}
+            movies = Movie.query.all()
+            for movie in movies:
+                formated_movies[movie.id] = movie.format()
             return jsonify({
-                'success': True
+                'success': True,
+                'movies': formated_movies
+
             })
         except:
             return jsonify({
