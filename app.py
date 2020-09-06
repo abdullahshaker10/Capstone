@@ -1,9 +1,6 @@
 import os
-
 from flask import Flask, request, abort, jsonify
 from flask_cors import CORS
-from flask_migrate import Migrate
-from models import db
 from models import Actor, Movie, setup_db
 from auth import AuthError, requires_auth
 
@@ -26,7 +23,7 @@ def create_app(test_config=None):
                 'success': True,
                 'actors': formated_actors
             })
-        except:
+        except BaseException:
             return jsonify({
                 "success": False,
                 "error": 500,
@@ -45,7 +42,7 @@ def create_app(test_config=None):
                 'success': True,
                 'movies': formated_movies
             })
-        except:
+        except BaseException:
             return jsonify({
                 "success": False,
                 "error": 500,
@@ -124,7 +121,7 @@ def create_app(test_config=None):
                 'actors': formated_actors
 
             })
-        except:
+        except BaseException:
             return jsonify({
                 "success": False,
                 "error": 500,
@@ -154,7 +151,7 @@ def create_app(test_config=None):
                 'success': True,
                 'movies': formated_movies
             })
-        except:
+        except BaseException:
             return jsonify({
                 "success": False,
                 "error": 500,
@@ -192,7 +189,7 @@ def create_app(test_config=None):
                 'actors': formated_actors
 
             })
-        except:
+        except BaseException:
             return jsonify({
                 "success": False,
                 "error": 500,
@@ -228,7 +225,7 @@ def create_app(test_config=None):
                 'movies': formated_movies
 
             })
-        except:
+        except BaseException:
             return jsonify({
                 "success": False,
                 "error": 500,

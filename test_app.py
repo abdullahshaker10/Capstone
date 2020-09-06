@@ -12,7 +12,7 @@ class TriviaTestCase(unittest.TestCase):
         """Define test variables and initialize app."""
         self.app = create_app()
         self.client = self.app.test_client
-        self.test_database_path = os.environ.get('TEST_DATABASE_URL')
+        self.test_database_path = os.environ['TEST_DATABASE_URL']
         setup_db(self.app, self.test_database_path)
 
         # binds the app to the current context
@@ -36,10 +36,9 @@ class TriviaTestCase(unittest.TestCase):
             self.uncorrect_movie = {
                 'title': '',
             }
-            self.producer_token = os.environ.get('producer_token')
-            self.director_casting_token = os.environ.get('director_casting_token')
-
-            self.assistant_casting_token = os.environ.get('assistant_casting_token')
+            self.producer_token = os.environ['producer_token']
+            self.director_casting_token = os.environ['director_casting_token']
+            self.assistant_casting_token = os.environ['assistant_casting_token']
 
     def tearDown(self):
         """Executed after reach test"""
