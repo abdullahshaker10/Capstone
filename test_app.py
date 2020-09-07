@@ -167,7 +167,7 @@ class TriviaTestCase(unittest.TestCase):
         self.assertTrue(data['actors'])
 
     def test_404_update_actor(self):
-        res = self.client().patch('/actors/70', headers={
+        res = self.client().patch('/actors/700', headers={
             'Authorization': "Bearer {}".format(self.director_casting_token)
         },
             json=self.correct_actor)
