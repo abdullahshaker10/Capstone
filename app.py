@@ -213,8 +213,8 @@ def create_app(test_config=None):
             body = request.get_json()
             title = body.get('title', None)
             start_time = body.get('start_time', None)
-            movie.name = title
-            movie.age = start_time
+            movie.title = title
+            movie.start_time = start_time
             movie.update()
             formated_movies = {}
             movies = Movie.query.all()
